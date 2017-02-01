@@ -57,6 +57,21 @@ bool isLegal(int puzzle[L], int x, int y, int target)
 	 &&    !inB(puzzle, x - x%3, y - y%3, target);
 }
 
+bool isEmpty(int puzzle[L], int &x, int &y)
+{
+	for(x = 0; x < W; x++)
+	{
+		for(y = 0; y < W; y++)
+		{
+			if(puzzle[getIndex(y,x)] == EMPTY)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 int main(int argc, char *argv[])
 {
 	int col;
@@ -70,9 +85,10 @@ int main(int argc, char *argv[])
                        1, 3, 0, 0, 0, 0, 2, 5, 0,
                        0, 0, 0, 0, 0, 0, 0, 7, 4,
                        0, 0, 5, 2, 0, 6, 3, 0, 0};
-	int target = 3;
-	cout << inX(puzzle, 8, target) << endl;
-	cout << inY(puzzle, 5, target) << endl;
-	cout << inB(puzzle, 4 - 4%3, 4 - 4%3, target) << endl;
+	int target = 1;
+
+
+	
+	cout << isLegal(puzzle, 7, 7, target) << endl;
 	return 0;
 }
