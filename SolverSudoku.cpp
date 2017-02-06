@@ -72,10 +72,49 @@ bool isEmpty(int puzzle[L], int &x, int &y)
 	return false;
 }
 
+bool SolveSudoku(int puzzle[L])
+{
+    int y;
+    int x;
+    
+    if(isEmpty(puzzle, x, y) == true)
+    {
+        return true;   
+    }
+    
+    for (int digit = 1; digit <= 9; digit++)
+    {
+        if(isLegal(puzzle, x, y, digit) == true)
+        {
+            puzzle[getIndex(y,x)] = digit;
+            
+            if(SolveSudoku(puzzle) == true)
+            {
+                return true;   
+            }
+            
+            puzzle[getIndex(y,x)] = EMPTY;
+        }
+    }
+    return false;
+    
+}
+
+void outputPuzzle(int puzzle[L])
+{
+    for(int y = 0; y < W; y++)
+    {
+        for(int x = 0; x < W; x++)
+        {
+            cout << " " << puzzle[getIndex(y,x)] << " ";   
+        }
+        cout << endl;
+    }
+}
+
 int main(int argc, char *argv[])
 {
-	int col;
-	int row;
+
 	int puzzle[L] =   {3, 0, 6, 5, 0, 8, 4, 0, 0,
                        5, 2, 0, 0, 0, 0, 0, 0, 0,
                        0, 8, 7, 0, 0, 0, 0, 3, 1,
@@ -85,10 +124,15 @@ int main(int argc, char *argv[])
                        1, 3, 0, 0, 0, 0, 2, 5, 0,
                        0, 0, 0, 0, 0, 0, 0, 7, 4,
                        0, 0, 5, 2, 0, 6, 3, 0, 0};
-	int target = 1;
-
-
-	
-	cout << isLegal(puzzle, 7, 7, target) << endl;
+                       
+    if(SolveSudoku(puzzle) == true)
+    {
+        cout << "Solved" << endl;
+        outputPuzzle(puzzle);
+    }
+    else
+    {
+        cout << "Unsolvable" << endl;    
+    }
 	return 0;
 }
