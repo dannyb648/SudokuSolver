@@ -77,7 +77,7 @@ bool SolveSudoku(int puzzle[L])
     int y;
     int x;
     
-    if(isEmpty(puzzle, x, y) == true)
+    if(isEmpty(puzzle, x, y) == false)
     {
         return true;   
     }
